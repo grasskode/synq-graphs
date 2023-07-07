@@ -41,8 +41,7 @@ Since we want to optimize for query performance, we can start with graph represe
   func (g *Graph) downstream(paths []string) ([]string, error) {
     // implement
   }
-​```
-
+```
 
 We can use recursion to calculate upstream and downstream paths for any given list of incoming paths. Given this structure, these lookups should be available with `O(k)` complexity where `k` is the maximum depth of the graph. Worst case for a single file lineage, this corresponds to `O(n)` where `n` is the number of nodes in the graph. This gives us a linear performance. We could improve this further with caching if required (LRU or most time consuming paths).
 
