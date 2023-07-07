@@ -32,6 +32,7 @@ type Graph struct {
 	nodes map[string]*Node
 }
 
+// Gets all the upstream nodes in the graph for the given paths.
 func (g *Graph) upstream(paths []string) ([]string, error) {
 	found := make(map[string]bool)
 	processed := []string{}
@@ -69,6 +70,7 @@ func (g *Graph) upstream(paths []string) ([]string, error) {
 	return result, nil
 }
 
+// Gets all the downstream nodes in the graph for the given paths.
 func (g *Graph) downstream(paths []string) ([]string, error) {
 	found := make(map[string]bool)
 	processed := []string{}
@@ -106,6 +108,8 @@ func (g *Graph) downstream(paths []string) ([]string, error) {
 	return result, nil
 }
 
+// Returns the node corresponding to the path. Creates one
+// if it does not exist.
 func (g *Graph) getOrCreate(path string) *Node {
 	node, ok := g.nodes[path]
 	if !ok {
@@ -119,6 +123,7 @@ func (g *Graph) getOrCreate(path string) *Node {
 	return node
 }
 
+// Checks if the given slice contains a string.
 func contains(s []string, str string) bool {
 	for _, v := range s {
 		if v == str {
@@ -128,6 +133,7 @@ func contains(s []string, str string) bool {
 	return false
 }
 
+// Inserts the given relation to the graph.
 func (g *Graph) insert(from string, to string) {
 	if g.nodes == nil {
 		g.nodes = make(map[string]*Node)
@@ -141,6 +147,7 @@ func (g *Graph) insert(from string, to string) {
 	}
 }
 
+// Print the graph nodes. Used for debugging.
 func (g *Graph) print() {
 	for _, node := range g.nodes {
 		fmt.Println(node.path, "-> upstream:", node.upstream, "downstream:", node.downstream)
