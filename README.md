@@ -7,8 +7,7 @@ go test
 
 ## Approach
 
-> 💡
-Considerations:
+> 💡 Considerations:
 * Typical graph has up to 10M relationships
 * Paths of assets could be rather long as they are formatted from underlying external storage out of our control. You can assume string length of up to 1,024.
 * Optimise for query performance over graph load performance. The latency of the system for queries should be in milliseconds even for large lineages (10k nodes)
@@ -18,7 +17,7 @@ Considerations:
 
 Since we want to optimize for query performance, we can start with graph represented by nodes that hold their upstream and downstream connections.
 
-```
+```golang
   // Graph stores the graph representation and exposes
   // the functions used to traverse lineage. It stores
   // the nodes mapped by their paths.
@@ -42,7 +41,6 @@ Since we want to optimize for query performance, we can start with graph represe
   func (g *Graph) downstream(paths []string) ([]string, error) {
     // implement
   }
-
 ​```
 
 
